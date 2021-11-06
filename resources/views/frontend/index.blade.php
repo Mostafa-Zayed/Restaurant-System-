@@ -39,13 +39,10 @@
 </section><!-- End Hero -->
 
 <main id="main">
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container-fluid">
-
             <div class="row">
-
                 <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/about.jpg");'>
                     <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
                 </div>
@@ -123,105 +120,34 @@
     <!-- ======= Menu Section ======= -->
     <section id="menu" class="menu">
         <div class="container">
-
             <div class="section-title">
                 <h2>Check our tasty <span>Menu</span></h2>
             </div>
-
+            @if(isset($categories) && $categories->count() > 0 )
             <div class="row">
                 <div class="col-lg-12 d-flex justify-content-center">
                     <ul id="menu-flters">
                         <li data-filter="*" class="filter-active">Show All</li>
-                        <li data-filter=".filter-starters">Starters</li>
-                        <li data-filter=".filter-salads">Salads</li>
-                        <li data-filter=".filter-specialty">Specialty</li>
+                        @foreach($categories as $category)
+                        <li data-filter=".filter-{{strtolower($category->name)}}">{{ucfirst($category->name)}}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
-
+            @endif
             <div class="row menu-container">
-
+                @if(isset($menus) && $menus->count() > 0)
+                @foreach($menus as $menu)
                 <div class="col-lg-6 menu-item filter-starters">
                     <div class="menu-content">
-                        <a href="#">Lobster Bisque</a><span>$5.95</span>
+                        <a href="#">{{$menu->name}}</a><span>${{$menu->price}}</span>
                     </div>
                     <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
+                        {{substr($menu->description,0,20)}}
                     </div>
                 </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <div class="menu-content">
-                        <a href="#">Bread barrel</a><span>$6.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-starters">
-                    <div class="menu-content">
-                        <a href="#">Crab Cake</a><span>$7.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <div class="menu-content">
-                        <a href="#">Caesar Selections</a><span>$8.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <div class="menu-content">
-                        <a href="#">Tuscan Grilled</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Grilled chicken with provolone, artichoke hearts, and roasted red pesto
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-starters">
-                    <div class="menu-content">
-                        <a href="#">Mozzarella Stick</a><span>$4.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Lorem, deren, trataro, filede, nerada
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <div class="menu-content">
-                        <a href="#">Greek Salad</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Fresh spinach, crisp romaine, tomatoes, and Greek olives
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-salads">
-                    <div class="menu-content">
-                        <a href="#">Spinach Salad</a><span>$9.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
-                    </div>
-                </div>
-
-                <div class="col-lg-6 menu-item filter-specialty">
-                    <div class="menu-content">
-                        <a href="#">Lobster Roll</a><span>$12.95</span>
-                    </div>
-                    <div class="menu-ingredients">
-                        Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-                    </div>
-                </div>
-
+                @endforeach
+                @endif
             </div>
 
         </div>
@@ -239,38 +165,33 @@
             <div class="row">
                 <div class="col-lg-3">
                     <ul class="nav nav-tabs flex-column">
+                        @foreach($specials as $special)
                         <li class="nav-item">
-                            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
+                            <a class="nav-link @if($special->id === 1) {{'active show'}}@endif" data-bs-toggle="tab" href="#tab-{{$special->id}}">{{$special->name}}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-9 mt-4 mt-lg-0">
                     <div class="tab-content">
-                        <div class="tab-pane active show" id="tab-1">
+                        @if(isset($specials) && $specials->count() > 0)
+                        @foreach($specials as $special)
+                        <div class="tab-pane @if($special->id === 1) {{'active show'}}@endif" id="tab-{{$special->id}}">
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
-                                    <h3>Architecto ut aperiam autem id</h3>
-                                    <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                                    <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                                    <h3>{{$special->name}}</h3>
+                                    <!-- <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p> -->
+                                    <p>{{$special->description}}</p>
+                                    <!-- <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p> -->
                                 </div>
                                 <div class="col-lg-4 text-center order-1 order-lg-2">
                                     <img src="assets/img/specials-1.jpg" alt="" class="img-fluid">
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="tab-2">
+                        @endforeach
+                        @endif
+                        <!-- <div class="tab-pane" id="tab-3">
                             <div class="row">
                                 <div class="col-lg-8 details order-2 order-lg-1">
                                     <h3>Et blanditiis nemo veritatis excepturi</h3>
@@ -317,7 +238,7 @@
                                     <img src="assets/img/specials-5.jpg" alt="" class="img-fluid">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

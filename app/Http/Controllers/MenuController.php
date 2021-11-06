@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -26,8 +27,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id','name')->where('status','on')->get();
-        return view('backend.managment.menus.create',compact('categories'));
+        $categories = Category::select('id', 'name')->whereNotNull('status')->get();
+        $images = Image::select('id', 'name')->get();
+        return view('backend.managment.menus.create', compact('categories', 'images'));
     }
 
     /**
@@ -40,18 +42,32 @@ class MenuController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255|min:3',
+            'name' => 'required|string|max:255|min:3|unique:menus,name',
             'price' => 'required',
             'category_id' => 'required|integer|exists:categories,id|not_in:0',
-            'description' => 'required|string',
-            'image_id' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg',
+            'image_id' => 'nullable|integer|exists:images,id|not_in:0',
+            // 'content' => 'required|string',
             'discount' => 'nullable|max:3',
             'status' => 'nullable|in:on',
-            'special' => 'nullable|in:on'
-
-
+            'special' => 'nullable|in:on',
+            // 'menu-trixFields' => 'required'
         ]);
-        
+
+        // dd($request->all());
+        if (Menu::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'image_id' => $request->image_id,
+            'discount' => $request->discount,
+            'status' => $request->status,
+            'special' => $request->special,
+            'menu-trixFields' => request('menu-trixFields'),
+        ])) {
+            
+            session()->flash('success', ucfirst($request->name) . ' Menu is Created Successfully');
+            return redirect()->route('managment.menus.index');
+        }
     }
 
     /**

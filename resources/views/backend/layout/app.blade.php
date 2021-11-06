@@ -18,7 +18,7 @@
 
 	<!-- App CSS -->
 	<link id="theme-style" rel="stylesheet" href="{{asset('backend/assets/css/portal.css')}}">
-
+@yield('styles')
 </head>
 
 <body class="app">

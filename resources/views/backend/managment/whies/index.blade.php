@@ -4,11 +4,11 @@
     <div class="container-xl">
         <div class="row">
             <div class="col-lg-9">
-                <h1 class="app-page-title"> <span> <i class="fas fa-bars"></i> </span> Categories</h1>
+                <h1 class="app-page-title"> <span> <i class="fas fa-bars"></i> </span>Featuries</h1>
             </div>
             <div class="col-lg-3 mb-2">
                 <div class="col-auto text-right">
-                    <a class="btn app-btn-secondary" href="{{route('managment.categories.create')}}"> <i class="fas fa-plus"></i> Create Category</a>
+                    <a class="btn app-btn-secondary" href="{{route('managment.whies.create')}}"> <i class="fas fa-plus"></i> Create Feature</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="cell">Order</th>
-                                                <th class="cell">Name</th>
+                                                <th class="cell">Title</th>
+                                                <th class="cell">Description</th>
                                                 <th class="cell">Status</th>
                                                 <th class="cell" colspan="4" style="text-align: center;">Actions</th>
                                             </tr>
@@ -36,7 +37,8 @@
                                             @foreach($rows as $row)
                                             <tr>
                                                 <td class="cell">#{{$row->id}}</td>
-                                                <td class="cell"><span class="truncate">{{$row->name}}</td>
+                                                <td class="cell"><span class="truncate">{{$row->title}}</td>
+                                                <td class="cell"><span class="truncate">{{$row->description}}</td>
                                                 <td class="cell"><span class="btn badge bg-success">{{isset($row->status) ? $row->status : 'off'}}</span></td>
                                                 <td class="cell"><a class="btn app-btn-secondary" href="#">View</a></td>
                                                 <td class="cell"><a class="btn badge bg-warning" href="{{route('managment.categories.edit',$row->id)}}">Edit</a></td>

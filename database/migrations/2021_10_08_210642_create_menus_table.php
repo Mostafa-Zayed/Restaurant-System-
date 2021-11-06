@@ -15,9 +15,10 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
+            $table->string('name')->unique();
+            // $table->text('content');
             $table->decimal('price',8,2);
+            // $table->text('menu-trixFields')->nullable();
             $table->unsignedSmallInteger('discount')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('image_id')->nullable();

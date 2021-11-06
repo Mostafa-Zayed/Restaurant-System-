@@ -13,7 +13,7 @@
             </div>
         </div>
         @if(session()->has('success'))
-        @incldue('backend.includes.success')
+        @include('backend.includes.success')
         @endif
         <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
             <div class="inner">

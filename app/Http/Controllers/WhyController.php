@@ -14,7 +14,8 @@ class WhyController extends Controller
      */
     public function index()
     {
-        //
+        $rows = Why::select('id','title','description')->whereNotNull('status')->get();
+        dd($rows);
     }
 
     /**

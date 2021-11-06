@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
-
+use App\Models\Image;
 class ItemController extends Controller
 {
     /**
@@ -25,7 +25,8 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('backend.managment.items.create');
+        $images = Image::select('id','name')->get();
+        return view('backend.managment.items.create',compact('images'));
     }
 
     /**
@@ -36,7 +37,24 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable',
+            'price' => 'required|integer|min:1',
+            'img_id' => 'nullable:exists:images,id',
+            'status' => 'nullable|in:on',
+            'special' => 'nullable|in:on'
+        ]);
+        Item::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'img_id' => $request->img_id,
+            'status' => $request->status,
+            'special' => $request->special
+        ]);
+        session()->flash('success', ucfirst($request->name) . ' Item is Created Successfully');
+        return redirect()->route('managment.items.index');
     }
 
     /**

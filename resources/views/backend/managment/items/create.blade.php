@@ -4,7 +4,7 @@
     <div class="container-xl">
         <div class="row">
             <div class="col-md-10">
-                <h1 class="app-page-title"> <span> <i class="fas fa-bars"></i> </span> Create Category</h1>
+                <h1 class="app-page-title"> <span> <i class="fas fa-bars"></i> </span> Create Item</h1>
             </div>
         </div>
         <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
@@ -12,7 +12,7 @@
                 <div class="col-12 col-md-8">
                     <div class="app-card app-card-settings shadow-sm p-4">
                         <div class="app-card-body">
-                            @include('backend.managment.categories.form')
+                            @include('backend.managment.items.form')
                         </div>
                     </div>
                 </div>
